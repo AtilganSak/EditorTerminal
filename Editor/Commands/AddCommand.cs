@@ -27,28 +27,28 @@ namespace EditorTerminal
         {
             if (args.Length == 0)
             {
-                return "add <tag|layer|sortingLayer|SDS|scene|package> <isim> - projeye yeni bir tanim ekler.\n" +
-                       "Detay icin: add <kategori> -help";
+                return "add <tag|layer|sortingLayer|SDS|scene|package> <name> - adds a new definition to the project.\n" +
+                       "For details: add <category> -help";
             }
 
             switch (args[0])
             {
                 case "tag":
-                    return "add tag <isim>\nProjeye yeni bir Tag ekler (Tags & Layers).";
+                    return "add tag <name>\nAdds a new Tag to the project (Tags & Layers).";
                 case "layer":
-                    return "add layer <isim>\nProjeye yeni bir Layer ekler, ilk bos slotu kullanir (index 8-31).";
+                    return "add layer <name>\nAdds a new Layer to the project, using the first free slot (index 8-31).";
                 case "sortingLayer":
-                    return "add sortingLayer <isim>\nProjeye yeni bir Sorting Layer ekler.\n" +
-                           "Not: bu ayar icin public API yok, TagManager.asset dogrudan duzenleniyor - sirayi Tags & Layers penceresinden dogrula.";
+                    return "add sortingLayer <name>\nAdds a new Sorting Layer to the project.\n" +
+                           "Note: there is no public API for this, TagManager.asset is edited directly - verify the order in the Tags & Layers window.";
                 case "SDS":
-                    return "add SDS <sembol>\nAktif build target icin Scripting Define Symbol ekler.";
+                    return "add SDS <symbol>\nAdds a Scripting Define Symbol for the active build target.";
                 case "scene":
-                    return "add scene <isim veya path>\nBelirtilen sahneyi Build Settings sahne listesine ekler.";
+                    return "add scene <name or path>\nAdds the given scene to the Build Settings scene list.";
                 case "package":
-                    return "add package <id>\nUnity Package Manager uzerinden paket ekler (orn: com.unity.timeline veya bir git URL'i).\n" +
-                           "Islem asenkron; sonucu 'log' komutuyla kontrol et.";
+                    return "add package <id>\nAdds a package via the Unity Package Manager (e.g. com.unity.timeline or a git URL).\n" +
+                           "This is async; check the result with the 'log' command.";
                 default:
-                    return $"'{args[0]}' add icin gecerli bir kategori degil.";
+                    return $"'{args[0]}' is not a valid category for add.";
             }
         }
 

@@ -17,7 +17,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "play - Play Mode'a girer.";
+            return "play - enters Play Mode.";
         }
     }
 }

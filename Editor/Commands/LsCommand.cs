@@ -29,7 +29,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "ls - Mevcut dizindeki klasorleri ve dosyalari listeler. Klasorler '/' ile biter.";
+            return "ls - lists the folders and files in the current directory. Folders end with '/'.";
         }
     }
 }

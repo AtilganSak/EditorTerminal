@@ -45,7 +45,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "del <path> - Belirtilen dosyayi (uzantisiyla, orn: Scripts/Test.cs) siler. Mevcut dizine gore veya 'Assets/...' ile tam path verilebilir.";
+            return "del <path> - deletes the given file (with extension, e.g. Scripts/Test.cs). Can be relative to the current directory or a full path starting with 'Assets/...'.";
         }
     }
 }

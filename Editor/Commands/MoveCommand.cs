@@ -54,7 +54,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "move <source> <target> - Bir dosyayi veya klasoru (uzantisiyla) baska bir path'e tasir/yeniden adlandirir.";
+            return "move <source> <target> - moves/renames a file or folder (with extension) to another path.";
         }
     }
 }

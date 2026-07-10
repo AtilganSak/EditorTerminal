@@ -39,7 +39,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "select <path> - Belirtilen dosya/klasoru Project penceresinde secip focuslar. Mevcut dizine gore veya 'Assets/...' ile tam path verilebilir.";
+            return "select <path> - selects and focuses the given file/folder in the Project window. Can be relative to the current directory or a full path starting with 'Assets/...'.";
         }
     }
 }

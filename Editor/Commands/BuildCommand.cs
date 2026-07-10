@@ -75,9 +75,9 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "build <output klasoru> [true|false] - Aktif build target icin, Build Settings'teki aktif sahnelerle projeyi derler.\n" +
-                   "Dosya adi olarak Project Settings > Product Name kullanilir (Windows/Mac/Linux standalone icin uzanti otomatik eklenir).\n" +
-                   "Ikinci parametre true ise build sonrasi calistirir (Build And Run). Ornek: build C:\\Builds\\MyGame true";
+            return "build <output folder> [true|false] - builds the project for the active build target, using the enabled scenes from Build Settings.\n" +
+                   "The file name comes from Project Settings > Product Name (extension is added automatically for Windows/Mac/Linux standalone).\n" +
+                   "If the second parameter is true, runs the build afterward (Build And Run). Example: build C:\\Builds\\MyGame true";
         }
     }
 }

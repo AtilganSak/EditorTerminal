@@ -18,7 +18,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "quit - Unity Editor'u kapatir. Kaydedilmemis degisiklik varsa once kaydetmeni sorar.";
+            return "quit - closes the Unity Editor. Asks to save first if there are unsaved changes.";
         }
     }
 }

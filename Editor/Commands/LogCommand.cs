@@ -39,7 +39,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "log [n] - Konsola gelen son n log/warning/error mesajini yazdirir (varsayilan 20). Sadece bu terminal acildiktan sonraki mesajlari yakalar.";
+            return "log [n] - prints the last n log/warning/error messages from the Console (default 20). Only captures messages since this terminal was opened.";
         }
     }
 }

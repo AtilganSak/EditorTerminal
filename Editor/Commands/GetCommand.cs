@@ -37,16 +37,16 @@ namespace EditorTerminal
             if (args.Length == 0)
             {
                 var categories = _settings.Categories;
-                return "get <kategori> <key> - bir Unity/Editor ayarinin guncel degerini okur.\n" +
-                       "Kategoriler: " + string.Join(", ", categories) + "\n" +
-                       "Detay icin: get <kategori> -help  veya  get <kategori> <key> -help";
+                return "get <category> <key> - reads the current value of a Unity/Editor setting.\n" +
+                       "Categories: " + string.Join(", ", categories) + "\n" +
+                       "For details: get <category> -help  or  get <category> <key> -help";
             }
 
             if (args.Length == 1)
             {
                 var keys = _settings.KeysFor(args[0]).ToList();
                 if (keys.Count == 0)
-                    return $"'{args[0]}' gecerli bir kategori degil.";
+                    return $"'{args[0]}' is not a valid category.";
 
                 var lines = keys.Select(k => $"  {k.Key} - {k.Description}");
                 return $"get {args[0]} <key>\n" + string.Join("\n", lines);
@@ -54,7 +54,7 @@ namespace EditorTerminal
 
             var (found, description, _) = _settings.ReadValue(args[0], args[1]);
             if (!found)
-                return $"'{args[0]} {args[1]}' gecerli bir ayar degil.";
+                return $"'{args[0]} {args[1]}' is not a valid setting.";
 
             return $"get {args[0]} {args[1]}\n{description}";
         }

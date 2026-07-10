@@ -53,7 +53,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "copy <source> <target> - Bir dosyayi veya klasoru (uzantisiyla) baska bir path'e kopyalar.";
+            return "copy <source> <target> - copies a file or folder (with extension) to another path.";
         }
     }
 }

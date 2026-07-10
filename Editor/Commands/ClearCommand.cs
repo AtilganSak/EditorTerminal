@@ -11,7 +11,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "clear - bu terminal sekmesinin gecmisini temizler.";
+            return "clear - clears this terminal tab's history.";
         }
     }
 }

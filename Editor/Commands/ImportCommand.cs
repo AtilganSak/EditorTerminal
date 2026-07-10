@@ -26,8 +26,8 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "import <path> - Bilgisayarindaki bir .unitypackage dosyasini projeye aktarir (Import Package penceresini acar).\n" +
-                   "Tam path ver, orn: import C:\\Users\\Admin\\Downloads\\MyPackage.unitypackage";
+            return "import <path> - imports a .unitypackage file from your computer into the project (opens the Import Package window).\n" +
+                   "Give a full path, e.g. import C:\\Users\\Admin\\Downloads\\MyPackage.unitypackage";
         }
     }
 }

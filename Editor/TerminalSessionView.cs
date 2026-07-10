@@ -10,6 +10,7 @@ namespace EditorTerminal
     {
         private const int _maxSuggestions = 8;
         private const int _maxHistory = 10;
+        private const int _promptSpacerLines = 5;
 
         private static readonly Color _suggestionColor = new Color(0.6f, 0.6f, 0.6f);
         private static readonly Color _suggestionSelectedBg = new Color(0.25f, 0.45f, 0.85f);
@@ -25,6 +26,7 @@ namespace EditorTerminal
         private readonly List<string> _matches = new List<string>();
         private TextField _activeInput;
         private int _selectedSuggestion;
+        private VisualElement _promptSpacer;
 
         public TerminalSessionView(TerminalSessionData data, Font monoFont)
         {
@@ -41,7 +43,6 @@ namespace EditorTerminal
             _output.style.paddingLeft = 6;
             _output.style.paddingRight = 6;
             _output.style.paddingTop = 4;
-            _output.style.paddingBottom = 160;
             Root.Add(_output);
 
             ReplayHistory();
@@ -194,6 +195,7 @@ namespace EditorTerminal
             var promptText = CurrentPromptText();
 
             var row = NewCommandRow();
+            row.style.position = Position.Relative;
             row.Add(NewPromptLabel(promptText));
 
             var input = new TextField();
@@ -228,10 +230,13 @@ namespace EditorTerminal
             input.selectIndex = 0;
 
             var suggestions = new VisualElement();
+            suggestions.style.position = Position.Absolute;
+            suggestions.style.top = Length.Percent(100);
             suggestions.style.flexDirection = FlexDirection.Column;
-            suggestions.style.marginLeft = 12;
-            suggestions.style.marginBottom = 2;
+            suggestions.style.marginTop = 2;
+            suggestions.style.backgroundColor = TerminalTheme.BackgroundColor;
             suggestions.style.display = DisplayStyle.None;
+            row.Add(suggestions);
 
             var historyIndex = new[] { _data.History.Count };
 
@@ -239,7 +244,11 @@ namespace EditorTerminal
             input.RegisterValueChangedCallback(evt => UpdateSuggestions(suggestions, evt.newValue, promptText));
 
             _output.Add(row);
-            _output.Add(suggestions);
+
+            _promptSpacer = new VisualElement();
+            _promptSpacer.style.height = _promptSpacerLines * (TerminalTheme.FontSize + 6);
+            _output.Add(_promptSpacer);
+
             _activeInput = input;
 
             input.SetEnabled(!EditorApplication.isCompiling);
@@ -303,7 +312,7 @@ namespace EditorTerminal
                     _matches.Clear();
             }
 
-            suggestions.style.marginLeft = MeasureTextWidth(promptText + text?.Substring(0, wordStart));
+            suggestions.style.left = MeasureTextWidth(promptText + text?.Substring(0, wordStart));
 
             _selectedSuggestion = 0;
             RenderSuggestions(suggestions);
@@ -339,7 +348,7 @@ namespace EditorTerminal
 
                 var item = new Label(_matches[i]);
                 item.style.unityFontDefinition = FontDefinition.FromFont(_monoFont);
-                item.style.fontSize = 12;
+                item.style.fontSize = TerminalTheme.FontSize;
                 item.style.paddingLeft = 6;
                 item.style.paddingRight = 6;
                 item.style.paddingTop = 1;
@@ -429,7 +438,8 @@ namespace EditorTerminal
                 return;
             }
 
-            _output.Remove(suggestions);
+            row.Remove(suggestions);
+            _output.Remove(_promptSpacer);
 
             row.Remove(input);
             row.Add(NewTextLabel(command));
@@ -468,7 +478,13 @@ namespace EditorTerminal
 
         void ScrollToBottom()
         {
-            _output.schedule.Execute(() => _output.scrollOffset = new Vector2(0, float.MaxValue));
+            _output.contentContainer.RegisterCallback<GeometryChangedEvent>(OnContentGeometryChanged);
+        }
+
+        void OnContentGeometryChanged(GeometryChangedEvent evt)
+        {
+            _output.contentContainer.UnregisterCallback<GeometryChangedEvent>(OnContentGeometryChanged);
+            _output.scrollOffset = new Vector2(0, float.MaxValue);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "print <metin> - metni terminale yazdirir.\nOrnek: print \"Hello World\"";
+            return "print <text> - prints text to the terminal.\nExample: print \"Hello World\"";
         }
     }
 }

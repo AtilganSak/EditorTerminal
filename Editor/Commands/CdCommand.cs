@@ -41,7 +41,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "cd <path> - Belirtilen klasore gecer. 'cd ..' bir ust klasore gider. 'cd -r' konumu Assets'e sifirlar. Assets disina cikilamaz.";
+            return "cd <path> - moves to the given folder. 'cd ..' goes up one folder. 'cd -r' resets the location to Assets. You can't leave Assets.";
         }
     }
 }

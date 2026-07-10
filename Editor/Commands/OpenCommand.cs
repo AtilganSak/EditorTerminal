@@ -27,26 +27,26 @@ namespace EditorTerminal
         {
             if (args.Length == 0)
             {
-                return "open <hedef> [...] - belirtilen Unity penceresini/ayarini acar.\n" +
-                       "Hedefler: " + string.Join(", ", _targets) + "\n" +
-                       "Detay icin: open <hedef> -help";
+                return "open <target> [...] - opens the specified Unity window/setting.\n" +
+                       "Targets: " + string.Join(", ", _targets) + "\n" +
+                       "For details: open <target> -help";
             }
 
             switch (args[0])
             {
-                case "projectSettings": return "open projectSettings\nProject Settings penceresini acar.";
-                case "preferences": return "open preferences\nPreferences (Editor ayarlari) penceresini acar.";
-                case "lighting": return "open lighting\nLighting penceresini acar (Window/Rendering/Lighting).";
-                case "animation": return "open animation\nAnimation penceresini acar.";
-                case "animator": return "open animator\nAnimator penceresini acar.";
-                case "audioMixer": return "open audioMixer\nAudio Mixer penceresini acar.";
-                case "navigation": return "open navigation\nNavigation (AI) penceresini acar.";
-                case "projectWindow": return "open projectWindow\nProject penceresini acar.";
-                case "console": return "open console\nConsole penceresini acar.";
-                case "hierarchy": return "open hierarchy\nHierarchy penceresini acar.";
-                case "inspector": return "open inspector\nInspector penceresini acar.";
-                case "scene": return "open scene <isim veya path>\nBelirtilen sahneyi acar. Isim verilirse projede aranir.";
-                default: return $"'{args[0]}' open icin gecerli bir hedef degil.";
+                case "projectSettings": return "open projectSettings\nOpens the Project Settings window.";
+                case "preferences": return "open preferences\nOpens the Preferences (Editor settings) window.";
+                case "lighting": return "open lighting\nOpens the Lighting window (Window/Rendering/Lighting).";
+                case "animation": return "open animation\nOpens the Animation window.";
+                case "animator": return "open animator\nOpens the Animator window.";
+                case "audioMixer": return "open audioMixer\nOpens the Audio Mixer window.";
+                case "navigation": return "open navigation\nOpens the Navigation (AI) window.";
+                case "projectWindow": return "open projectWindow\nOpens the Project window.";
+                case "console": return "open console\nOpens the Console window.";
+                case "hierarchy": return "open hierarchy\nOpens the Hierarchy window.";
+                case "inspector": return "open inspector\nOpens the Inspector window.";
+                case "scene": return "open scene <name or path>\nOpens the given scene. If a name is given, it's searched for in the project.";
+                default: return $"'{args[0]}' is not a valid target for open.";
             }
         }
 

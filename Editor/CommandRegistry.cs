@@ -102,7 +102,7 @@ namespace EditorTerminal
                 return $"'{name}' is not recognized as a command.";
 
             if (!(command is ICommandHelp helpProvider))
-                return $"{command.Name}: yardim tanimli degil.";
+                return $"{command.Name}: no help defined.";
 
             var helpArgs = new string[tokens.Length - 2];
             Array.Copy(tokens, 1, helpArgs, 0, helpArgs.Length);

@@ -40,16 +40,16 @@ namespace EditorTerminal
         {
             if (args.Length == 0)
             {
-                return "remove <package> <isim> - projeden bir tanimi kaldirir.\n" +
-                       "Detay icin: remove package -help";
+                return "remove <package> <name> - removes a definition from the project.\n" +
+                       "For details: remove package -help";
             }
 
             switch (args[0])
             {
                 case "package":
-                    return "remove package <id> - Unity Package Manager'dan bir paketi kaldirir (orn: com.unity.timeline). Islem asenkron; sonucu 'log' komutuyla kontrol et.";
+                    return "remove package <id> - removes a package via the Unity Package Manager (e.g. com.unity.timeline). This is async; check the result with the 'log' command.";
                 default:
-                    return $"'{args[0]}' remove icin gecerli bir kategori degil.";
+                    return $"'{args[0]}' is not a valid category for remove.";
             }
         }
     }

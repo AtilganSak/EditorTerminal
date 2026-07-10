@@ -17,7 +17,7 @@ namespace EditorTerminal
 
         public string GetHelp(string[] args)
         {
-            return "pause - Play Mode'dayken duraklatir, tekrar calistirilirsa devam ettirir.";
+            return "pause - pauses while in Play Mode, resumes if run again.";
         }
     }
 }

@@ -33,42 +33,42 @@ namespace EditorTerminal
         {
             _defs = new List<SettingDef>
             {
-                Def1("player", "colorSpace", "Renk uzayi (PlayerSettings.colorSpace).", () => new[] { "Gamma", "Linear" }, v =>
+                Def1("player", "colorSpace", "Color space (PlayerSettings.colorSpace).", () => new[] { "Gamma", "Linear" }, v =>
                 {
                     PlayerSettings.colorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), v);
                     return null;
                 }, () => PlayerSettings.colorSpace.ToString(), defaultValue: "Gamma"),
-                Def1("player", "graphicsJob", "Graphics Jobs acik/kapali (PlayerSettings.graphicsJobs).", () => _trueFalse, v =>
+                Def1("player", "graphicsJob", "Graphics Jobs on/off (PlayerSettings.graphicsJobs).", () => _trueFalse, v =>
                 {
                     PlayerSettings.graphicsJobs = Bool(v);
                     return null;
                 }, () => BoolStr(PlayerSettings.graphicsJobs), defaultValue: "false"),
-                Def1("player", "scriptingBackend", "Aktif build target icin scripting backend (Mono/IL2CPP).", () => new[] { "Mono", "IL2CPP" }, v =>
+                Def1("player", "scriptingBackend", "Scripting backend for the active build target (Mono/IL2CPP).", () => new[] { "Mono", "IL2CPP" }, v =>
                 {
                     PlayerSettings.SetScriptingBackend(ActiveTarget, v == "IL2CPP" ? ScriptingImplementation.IL2CPP : ScriptingImplementation.Mono2x);
                     return null;
                 }, () => PlayerSettings.GetScriptingBackend(ActiveTarget) == ScriptingImplementation.IL2CPP ? "IL2CPP" : "Mono", defaultValue: "Mono"),
-                Def1("player", "apicoml", "Aktif build target icin API Compatibility Level. Degerler kurulu Unity'den dinamik cekilir.", () => Enum.GetNames(typeof(ApiCompatibilityLevel)), v =>
+                Def1("player", "apicoml", "API Compatibility Level for the active build target. Values are pulled dynamically from the installed Unity.", () => Enum.GetNames(typeof(ApiCompatibilityLevel)), v =>
                 {
                     PlayerSettings.SetApiCompatibilityLevel(ActiveTarget, (ApiCompatibilityLevel)Enum.Parse(typeof(ApiCompatibilityLevel), v));
                     return null;
                 }, () => PlayerSettings.GetApiCompatibilityLevel(ActiveTarget).ToString()),
-                Def1("player", "incGC", "Incremental Garbage Collector acik/kapali (PlayerSettings.gcIncremental).", () => _trueFalse, v =>
+                Def1("player", "incGC", "Incremental Garbage Collector on/off (PlayerSettings.gcIncremental).", () => _trueFalse, v =>
                 {
                     PlayerSettings.gcIncremental = Bool(v);
                     return null;
                 }, () => BoolStr(PlayerSettings.gcIncremental), defaultValue: "true"),
-                Def1("player", "allowUC", "Unsafe code'a izin ver (PlayerSettings.allowUnsafeCode).", () => _trueFalse, v =>
+                Def1("player", "allowUC", "Allow unsafe code (PlayerSettings.allowUnsafeCode).", () => _trueFalse, v =>
                 {
                     PlayerSettings.allowUnsafeCode = Bool(v);
                     return null;
                 }, () => BoolStr(PlayerSettings.allowUnsafeCode), defaultValue: "false"),
-                Def1("player", "packageName", "Android icin uygulama identifier'i (PlayerSettings.SetApplicationIdentifier, sadece Android).", null, v =>
+                Def1("player", "packageName", "Application identifier for Android (PlayerSettings.SetApplicationIdentifier, Android only).", null, v =>
                 {
                     PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, v);
                     return null;
                 }, () => PlayerSettings.GetApplicationIdentifier(NamedBuildTarget.Android)),
-                Def1("player", "version", "Uygulama versiyonu (PlayerSettings.bundleVersion).", null, v =>
+                Def1("player", "version", "Application version (PlayerSettings.bundleVersion).", null, v =>
                 {
                     PlayerSettings.bundleVersion = v;
                     return null;
@@ -76,22 +76,22 @@ namespace EditorTerminal
                 Def1("player", "bundleVersionCode", "Android Bundle Version Code (PlayerSettings.Android.bundleVersionCode).", null, v =>
                 {
                     if (!int.TryParse(v, out var code))
-                        return $"'{v}' gecerli bir sayi degil.";
+                        return $"'{v}' is not a valid number.";
                     PlayerSettings.Android.bundleVersionCode = code;
                     return null;
                 }, () => PlayerSettings.Android.bundleVersionCode.ToString()),
-                Def1("player", "minAPI", "Android minimum SDK versiyonu. Degerler kurulu Unity'den dinamik cekilir.", () => Enum.GetNames(typeof(AndroidSdkVersions)), v =>
+                Def1("player", "minAPI", "Android minimum SDK version. Values are pulled dynamically from the installed Unity.", () => Enum.GetNames(typeof(AndroidSdkVersions)), v =>
                 {
                     PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)Enum.Parse(typeof(AndroidSdkVersions), v);
                     return null;
                 }, () => PlayerSettings.Android.minSdkVersion.ToString()),
-                Def1("player", "targetAPI", "Android hedef SDK versiyonu. Degerler kurulu Unity'den dinamik cekilir.", () => Enum.GetNames(typeof(AndroidSdkVersions)), v =>
+                Def1("player", "targetAPI", "Android target SDK version. Values are pulled dynamically from the installed Unity.", () => Enum.GetNames(typeof(AndroidSdkVersions)), v =>
                 {
                     PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)Enum.Parse(typeof(AndroidSdkVersions), v);
                     return null;
                 }, () => PlayerSettings.Android.targetSdkVersion.ToString()),
 
-                Def1("quality", "qualityLevel", "Aktif Quality Level index'i (QualitySettings.SetQualityLevel).", null, v =>
+                Def1("quality", "qualityLevel", "Active Quality Level index (QualitySettings.SetQualityLevel).", null, v =>
                 {
                     QualitySettings.SetQualityLevel(int.Parse(v), true);
                     return null;
@@ -104,7 +104,7 @@ namespace EditorTerminal
 
                 Def1("time", "fixTime", "Fixed Timestep (Time.fixedDeltaTime).", null, v => { Time.fixedDeltaTime = float.Parse(v); return null; }, () => Time.fixedDeltaTime.ToString(), defaultValue: "0.02"),
                 Def1("time", "maxAllowTime", "Maximum Allowed Timestep (Time.maximumDeltaTime).", null, v => { Time.maximumDeltaTime = float.Parse(v); return null; }, () => Time.maximumDeltaTime.ToString(), defaultValue: "0.3333333"),
-                Def1("time", "timeScale", "Time.timeScale - bu bir proje ayari degil, Unity'nin canli runtime degeri. Sadece Play Mode'dayken kalici.", null, v =>
+                Def1("time", "timeScale", "Time.timeScale - this is not a project setting, it's Unity's live runtime value. Only persists while in Play Mode.", null, v =>
                 {
                     Time.timeScale = float.Parse(v);
                     return null;
@@ -121,12 +121,12 @@ namespace EditorTerminal
                     return null;
                 }, () => Physics.simulationMode.ToString(), defaultValue: "FixedUpdate"),
 
-                Def1("editor", "device", "Unity Remote - hedef cihaz (EditorSettings.unityRemoteDevice).", () => new[] { "None", "AnyAndroidDevice" }, v =>
+                Def1("editor", "device", "Unity Remote - target device (EditorSettings.unityRemoteDevice).", () => new[] { "None", "AnyAndroidDevice" }, v =>
                 {
                     EditorSettings.unityRemoteDevice = v == "AnyAndroidDevice" ? "Any Android Device" : "None";
                     return null;
                 }, () => EditorSettings.unityRemoteDevice == "Any Android Device" ? "AnyAndroidDevice" : "None", defaultValue: "None"),
-                Def1("editor", "compression", "Unity Remote - goruntu sikistirma formati (EditorSettings.unityRemoteCompression).", () => new[] { "JPEG", "PNG" }, v =>
+                Def1("editor", "compression", "Unity Remote - image compression format (EditorSettings.unityRemoteCompression).", () => new[] { "JPEG", "PNG" }, v =>
                 {
                     EditorSettings.unityRemoteCompression = v;
                     return null;
@@ -141,32 +141,32 @@ namespace EditorTerminal
                     EditorSettings.spritePackerMode = (SpritePackerMode)Enum.Parse(typeof(SpritePackerMode), v);
                     return null;
                 }, () => EditorSettings.spritePackerMode.ToString(), defaultValue: "Disabled"),
-                Def1("editor", "playeMode", "Enter Play Mode Options: domain/scene reload kombinasyonu.", () => new[] { "ReloadDomainScene", "ReloadSceneOnly", "ReloadDomainOnly", "DoNotReload" }, v =>
+                Def1("editor", "playeMode", "Enter Play Mode Options: domain/scene reload combination.", () => new[] { "ReloadDomainScene", "ReloadSceneOnly", "ReloadDomainOnly", "DoNotReload" }, v =>
                 {
                     ApplyPlayMode(v);
                     return null;
                 }, CurrentPlayMode, defaultValue: "ReloadDomainScene"),
 
-                Def1("terminal", "fontSize", "Terminal yazi boyutu (px).", null, v =>
+                Def1("terminal", "fontSize", "Terminal font size (px).", null, v =>
                 {
                     if (!int.TryParse(v, out var size) || size < 6 || size > 72)
-                        return "gecersiz boyut, 6-72 arasi bir sayi gir.";
+                        return "invalid size, enter a number between 6-72.";
                     TerminalTheme.FontSize = size;
                     TerminalTheme.RebuildAllWindows();
                     return null;
                 }, () => TerminalTheme.FontSize.ToString(), defaultValue: "13"),
-                Def1("terminal", "fontColor", "Terminal yazi rengi (hex #RRGGBB veya renk ismi).", () => _commonColorNames, v =>
+                Def1("terminal", "fontColor", "Terminal font color (hex #RRGGBB or color name).", () => _commonColorNames, v =>
                 {
                     if (!ColorUtility.TryParseHtmlString(v, out var color))
-                        return $"'{v}' gecerli bir renk degil. Ornek: #FFFFFF veya white.";
+                        return $"'{v}' is not a valid color. Example: #FFFFFF or white.";
                     TerminalTheme.FontColor = color;
                     TerminalTheme.RebuildAllWindows();
                     return null;
                 }, () => "#" + ColorUtility.ToHtmlStringRGB(TerminalTheme.FontColor), defaultValue: "#EBEBEB"),
-                Def1("terminal", "bgColor", "Terminal arkaplan rengi (hex #RRGGBB veya renk ismi).", () => _commonColorNames, v =>
+                Def1("terminal", "bgColor", "Terminal background color (hex #RRGGBB or color name).", () => _commonColorNames, v =>
                 {
                     if (!ColorUtility.TryParseHtmlString(v, out var color))
-                        return $"'{v}' gecerli bir renk degil. Ornek: #000000 veya black.";
+                        return $"'{v}' is not a valid color. Example: #000000 or black.";
                     TerminalTheme.BackgroundColor = color;
                     TerminalTheme.RebuildAllWindows();
                     return null;
@@ -276,7 +276,7 @@ namespace EditorTerminal
             if (args.Length == 3 && string.Equals(args[2], "-d", StringComparison.OrdinalIgnoreCase))
             {
                 if (def.DefaultValue == null)
-                    return $"'{args[0]} {args[1]}' icin bilinen bir varsayilan deger yok.";
+                    return $"'{args[0]} {args[1]}' has no known default value.";
                 return def.Apply(new[] { def.DefaultValue });
             }
 
@@ -292,33 +292,33 @@ namespace EditorTerminal
             if (args.Length == 0)
             {
                 var categories = _defs.Select(d => d.Category).Distinct();
-                return "set <kategori> <key> <deger> - bir Unity/Editor ayarini degistirir.\n" +
-                       "Kategoriler: " + string.Join(", ", categories) + "\n" +
-                       "Detay icin: set <kategori> -help  veya  set <kategori> <key> -help";
+                return "set <category> <key> <value> - changes a Unity/Editor setting.\n" +
+                       "Categories: " + string.Join(", ", categories) + "\n" +
+                       "For details: set <category> -help  or  set <category> <key> -help";
             }
 
             if (args.Length == 1)
             {
                 var keys = _defs.Where(d => d.Category == args[0]).ToList();
                 if (keys.Count == 0)
-                    return $"'{args[0]}' gecerli bir kategori degil.";
+                    return $"'{args[0]}' is not a valid category.";
 
                 var lines = keys.Select(d => $"  {d.Key} - {d.Description}");
-                return $"set {args[0]} <key> <deger>\n" + string.Join("\n", lines) +
-                       $"\nDetay icin: set {args[0]} <key> -help";
+                return $"set {args[0]} <key> <value>\n" + string.Join("\n", lines) +
+                       $"\nFor details: set {args[0]} <key> -help";
             }
 
             var def = _defs.FirstOrDefault(d => d.Category == args[0] && d.Key == args[1]);
             if (def == null)
-                return $"'{args[0]} {args[1]}' gecerli bir ayar degil.";
+                return $"'{args[0]} {args[1]}' is not a valid setting.";
 
             var values = def.ValueSuggestions?.Invoke(0, Array.Empty<string>())?.Where(v => v != "-d").ToList();
-            var valueHint = values != null && values.Count > 0 ? string.Join(", ", values) : "serbest metin/sayi";
+            var valueHint = values != null && values.Count > 0 ? string.Join(", ", values) : "free text/number";
             var defaultHint = def.DefaultValue != null
-                ? $"\nVarsayilan: {def.DefaultValue} (set {args[0]} {args[1]} -d ile donebilirsin)"
+                ? $"\nDefault: {def.DefaultValue} (revert with set {args[0]} {args[1]} -d)"
                 : "";
 
-            return $"set {args[0]} {args[1]} <deger>\n{def.Description}\nGecerli degerler: {valueHint}{defaultHint}";
+            return $"set {args[0]} {args[1]} <value>\n{def.Description}\nValid values: {valueHint}{defaultHint}";
         }
 
         internal IEnumerable<string> Categories => _defs.Select(d => d.Category).Distinct();
@@ -331,7 +331,7 @@ namespace EditorTerminal
             var def = _defs.FirstOrDefault(d => d.Category == category && d.Key == key);
             if (def == null)
                 return (false, null, null);
-            return (true, def.Description, def.Getter != null ? def.Getter() : "(okuma tanimli degil)");
+            return (true, def.Description, def.Getter != null ? def.Getter() : "(no reader defined)");
         }
     }
 }

@@ -31,32 +31,32 @@ namespace EditorTerminal
         {
             if (args.Length == 0)
             {
-                return "create <mono|editor|editorWindow|so|class|struct|material|scene> ... - Assets altinda yeni bir dosya/asset olusturur.\n" +
-                       "Detay icin: create <alt-komut> -help";
+                return "create <mono|editor|editorWindow|so|class|struct|material|scene> ... - creates a new file/asset under Assets.\n" +
+                       "For details: create <sub-command> -help";
             }
 
             switch (args[0])
             {
                 case "mono":
-                    return "create mono <isim> [path]\nBos bir MonoBehaviour script'i olusturur. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create mono <name> [path]\nCreates an empty MonoBehaviour script. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "editor":
-                    return "create editor <isim> <hedef script> [path]\nHedef script icin ozel Inspector (Editor) script'i olusturur ([CustomEditor]). path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create editor <name> <target script> [path]\nCreates a custom Inspector (Editor) script for the target script ([CustomEditor]). Writes to the current directory (terminal cwd) if path is omitted.";
                 case "editorWindow":
-                    return "create editorWindow <isim> [path]\nBos bir EditorWindow script'i olusturur, MenuItem ile acilir. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create editorWindow <name> [path]\nCreates an empty EditorWindow script, opened via a MenuItem. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "so":
-                    return "create so <isim> [file name] [menu name] [path]\nScriptableObject script'i olusturur ([CreateAssetMenu]). file name/menu name verilmezse isim kullanilir, path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create so <name> [file name] [menu name] [path]\nCreates a ScriptableObject script ([CreateAssetMenu]). Uses name for file name/menu name if omitted, writes to the current directory (terminal cwd) if path is omitted.";
                 case "class":
-                    return "create class <isim> [path]\nBos, Unity'ye bagli olmayan bir C# class dosyasi olusturur. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create class <name> [path]\nCreates an empty C# class file with no Unity dependency. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "struct":
-                    return "create struct <isim> [path]\nBos bir C# struct dosyasi olusturur. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create struct <name> [path]\nCreates an empty C# struct file. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "material":
-                    return "create material <isim> [color] [path]\nYeni Material asset'i olusturur (URP Lit shader, yoksa Standard). color hex (#RRGGBB) veya renk ismi (orn: red); verilmezse shader'in varsayilan rengi kullanilir. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create material <name> [color] [path]\nCreates a new Material asset (URP Lit shader, falling back to Standard). color as hex (#RRGGBB) or color name (e.g. red); the shader's default color is used if omitted. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "scene":
-                    return "create scene <isim> [path]\nYeni, bos bir sahne olusturur ve kaydeder. path verilmezse mevcut dizine (terminal cwd) yazar.";
+                    return "create scene <name> [path]\nCreates and saves a new, empty scene. Writes to the current directory (terminal cwd) if path is omitted.";
                 case "folder":
-                    return "create folder <isim> [path]\nYeni bos klasor olusturur. path verilmezse mevcut dizin (terminal cwd) altina olusturur.";
+                    return "create folder <name> [path]\nCreates a new empty folder. Created under the current directory (terminal cwd) if path is omitted.";
                 default:
-                    return $"'{args[0]}' create icin gecerli bir alt-komut degil.";
+                    return $"'{args[0]}' is not a valid sub-command for create.";
             }
         }
 
