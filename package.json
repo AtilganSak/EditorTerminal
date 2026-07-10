@@ -1,0 +1,18 @@
+{
+  "name": "com.heatinteractive.editorterminal",
+  "version": "1.0.0",
+  "displayName": "Editor Terminal",
+  "description": "A CMD-style command line inside a Unity EditorWindow for driving common editor/project tasks (creating scripts, opening windows, changing Player/Quality/Time/Physics settings, file navigation, Package Manager, builds) without leaving the keyboard.",
+  "unity": "6000.4",
+  "author": {
+    "name": "Atilgan Sak",
+    "email": "sak.atilgan@gmail.com",
+    "url": "https://github.com/AtilganSak"
+  },
+  "keywords": [
+    "editor",
+    "terminal",
+    "tools"
+  ],
+  "type": "tool"
+}
