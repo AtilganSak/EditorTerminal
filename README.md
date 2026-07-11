@@ -1,5 +1,7 @@
 # Editor Terminal
 
+![](https://github.com/AtilganSak/ProjectImages/blob/main/EditorTerminal/TerminalSS.png)
+
 A CMD-style command line inside a Unity `EditorWindow`. Drives common editor/project tasks
 (creating scripts, opening windows, changing Player/Quality/Time/Physics settings, file
 navigation, Package Manager, builds) without leaving the keyboard.
